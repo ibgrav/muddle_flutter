@@ -46,7 +46,7 @@ class MyHomeState extends State<MyHome> {
                     elevation: 4.0,
                     splashColor: Colors.blueGrey,
                     onPressed: () {
-                      glob.pushMember(context, filter.Moods());
+                      glob.pushMember(context, filter.Filters());
                       // glob.pushMember(context, results.SearchResults());
                     },
                   ),

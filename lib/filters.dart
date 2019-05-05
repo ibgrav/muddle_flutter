@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import './glob.dart' as glob;
+import './api.dart' as api;
 import './search.dart' as results;
 
-Scaffold filterPage(search, title, list, type, context, next) {
+Scaffold filterPage(bool search, String title, List list, String type, context, next) {
   FloatingActionButton toWindow;
   if (search) {
     toWindow = FloatingActionButton.extended(
-      onPressed: () {
+      onPressed: () async {
         print(glob.currentFilters);
+
+        var recipeResults = await api.searchRecipes();
+        glob.buildArray(recipeResults, 'recipes');
+
         glob.pushMember(context, results.SearchResults());
       },
       label: Text("RECIPES", style: glob.headStyle(0xFFefefef)),
@@ -67,28 +72,28 @@ Scaffold filterPage(search, title, list, type, context, next) {
   );
 }
 
-class Moods extends StatelessWidget {
+class Filters extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return filterPage(false, 'Moods', glob.moods, 'mood', context, Flavors());
+    return filterPage(false, 'Filters', glob.filters, 'filters', context, Ingredients());
   }
 }
 
-class Flavors extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return filterPage(
-        false, 'Flavors', glob.flavors, 'flavor', context, Complexity());
-  }
-}
+// class Flavors extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return filterPage(
+//         false, 'Flavors', glob.flavors, 'flavor', context, Complexity());
+//   }
+// }
 
-class Complexity extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return filterPage(false, 'Complexity', glob.complexities, 'complexity',
-        context, Ingredients());
-  }
-}
+// class Complexity extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return filterPage(false, 'Complexity', glob.complexities, 'complexity',
+//         context, Ingredients());
+//   }
+// }
 
 class Ingredients extends StatelessWidget {
   @override
@@ -131,7 +136,7 @@ class MyListState extends State<MyList> {
     filters = List<FilterButton>();
     for (var filter in widget.readList) {
       filters.add(FilterButton(
-        title: filter,
+        title: filter['name'],
         index: counter,
         length: widget.readList.length,
         selected: false,
