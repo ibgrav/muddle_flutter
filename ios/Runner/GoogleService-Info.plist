@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>846718265073-vu4kj79hme4ldojtl1qn9ibq0b8mqcud.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.846718265073-vu4kj79hme4ldojtl1qn9ibq0b8mqcud</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDlM68lMXpywB9O0OmskuVqFz2t-56EX6c</string>
+	<key>GCM_SENDER_ID</key>
+	<string>846718265073</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ibgrav.muddle</string>
+	<key>PROJECT_ID</key>
+	<string>muddle-app</string>
+	<key>STORAGE_BUCKET</key>
+	<string>muddle-app.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:846718265073:ios:96b6e80fec1b47af</string>
+	<key>DATABASE_URL</key>
+	<string>https://muddle-app.firebaseio.com</string>
+</dict>
+</plist>
