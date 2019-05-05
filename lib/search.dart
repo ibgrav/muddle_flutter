@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import './glob.dart' as glob;
+import './api.dart' as api;
+import './recipe.dart' as recipe;
 
 Scaffold searchPage(title, context) {
   return Scaffold(
@@ -22,10 +24,16 @@ class SearchResults extends StatelessWidget {
 }
 
 class RecipeResult {
-  RecipeResult({this.name, this.ingredients, this.index, this.length});
+  RecipeResult(
+      {this.name,
+      this.ingredients,
+      this.matchStrength,
+      this.index,
+      this.length});
 
   String name;
   List ingredients;
+  int matchStrength;
   int length;
   int index;
 }
@@ -52,10 +60,10 @@ class ResultsState extends State<Results> {
 
     recipes = List<RecipeResult>();
     for (var recipe in widget.recipeList) {
-      print(recipe);
       recipes.add(RecipeResult(
         name: recipe['name'],
         ingredients: recipe['ingredients'],
+        matchStrength: glob.recipeMatchStrength(recipe['ingredients']),
         index: counter,
         length: recipes.length,
       ));
@@ -85,18 +93,16 @@ class ResultsState extends State<Results> {
     );
   }
 
-  onBtnPressed(int index, List<RecipeResult> items) {
+  onBtnPressed(int index, List<RecipeResult> items) async {
     final item = items[index];
-    setState(() {
-      //item.selected = !item.selected;
+    // var getRecipe = await api.getRecipe(item.name.toString());
+    var gotRecipe;
+
+    glob.recipes.forEach((oneRecipe) {
+      if(oneRecipe['name'] == item.name) gotRecipe = oneRecipe;
     });
-    //glob.currentFilters[widget.listType] = [];
-    for (var one in items) {
-      // if (one.selected) {
-      //   glob.currentFilters[widget.listType].add(one.title);
-      // }
-      // print(one.title);
-    }
+
+    glob.pushMember(context, recipe.filterPage(gotRecipe));
   }
 }
 
@@ -142,7 +148,15 @@ class ListItem extends StatelessWidget {
 Column buildIngredientsList(RecipeResult recipe, TextStyle font) {
   var columnChildren = [
     Padding(
-      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+      padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+      child: Text(
+        'Match Strength: ' + recipe.matchStrength.toString(),
+        textAlign: TextAlign.center,
+        style: font,
+      ),
+    ),
+    Padding(
+      padding: EdgeInsets.fromLTRB(0, 5, 0, 10),
       child: Text(
         recipe.name,
         textAlign: TextAlign.center,

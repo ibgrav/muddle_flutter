@@ -84,6 +84,16 @@ buildArray(String allItems, String type) {
   }
 }
 
+recipeMatchStrength(ingredients){
+  int count = 0;
+  
+  for(var ingredient in ingredients){
+    if(currentFilters['ingredients'].contains(ingredient['name'])) count++;
+  }
+
+  return count;
+}
+
 read(filename, old) async {
   print('READ');
   try {

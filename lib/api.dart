@@ -17,14 +17,19 @@ ingredients() async {
   return data;
 }
 
+getRecipe(String name) async {
+  String data = await getHttp(url + 'recipes?name=' + name);
+  return data;
+}
+
 searchRecipes() async {
   String apiUrl = url + 'recipes?_limit=100';
 
-  if(glob.currentFilters['filters'].length > 0) {
-    for(String filter in glob.currentFilters['filters']) {
-      apiUrl += '&filters.name=' + filter;
-    }
-  }
+  // if(glob.currentFilters['filters'].length > 0) {
+  //   for(String filter in glob.currentFilters['filters']) {
+  //     apiUrl += '&filters.name=' + filter;
+  //   }
+  // }
 
   if(glob.currentFilters['ingredients'].length > 0) {
     for(String filter in glob.currentFilters['ingredients']) {
