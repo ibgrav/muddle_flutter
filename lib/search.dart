@@ -22,9 +22,10 @@ class SearchResults extends StatelessWidget {
 }
 
 class RecipeResult {
-  RecipeResult({this.name, this.index, this.length});
+  RecipeResult({this.name, this.ingredients, this.index, this.length});
 
   String name;
+  List ingredients;
   int length;
   int index;
 }
@@ -54,6 +55,7 @@ class ResultsState extends State<Results> {
       print(recipe);
       recipes.add(RecipeResult(
         name: recipe['name'],
+        ingredients: recipe['ingredients'],
         index: counter,
         length: recipes.length,
       ));
@@ -128,19 +130,40 @@ class ListItem extends StatelessWidget {
         onTap: onSelected,
         child: AnimatedContainer(
           duration: Duration(milliseconds: 250),
-          height: 200.0,
+          // height: 200.0,
           decoration: deco,
-          child: Center(
-            child: Text(
-              recipeResult.name,
-              textAlign: TextAlign.center,
-              style: font,
-            ),
-          ),
+          child: buildIngredientsList(recipeResult, font),
         ),
       ),
     );
   }
+}
+
+Column buildIngredientsList(RecipeResult recipe, TextStyle font) {
+  var columnChildren = [
+    Padding(
+      padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+      child: Text(
+        recipe.name,
+        textAlign: TextAlign.center,
+        style: font,
+      ),
+    ),
+  ];
+
+  for (var ingredient in recipe.ingredients) {
+    columnChildren.add(
+      Padding(
+          padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
+          child: Text(ingredient['name'], style: glob.textStyle)),
+    );
+  }
+
+  columnChildren.add(Padding(padding: EdgeInsets.only(bottom: 10)));
+
+  return Column(
+    children: columnChildren,
+  );
 }
 
 class FiltersDrop extends StatefulWidget {
