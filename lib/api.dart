@@ -25,12 +25,6 @@ getRecipe(String name) async {
 searchRecipes() async {
   String apiUrl = url + 'recipes?_limit=100';
 
-  // if(glob.currentFilters['filters'].length > 0) {
-  //   for(String filter in glob.currentFilters['filters']) {
-  //     apiUrl += '&filters.name=' + filter;
-  //   }
-  // }
-
   if(glob.currentFilters['ingredients'].length > 0) {
     for(String filter in glob.currentFilters['ingredients']) {
       apiUrl += '&ingredients.name=' + filter;

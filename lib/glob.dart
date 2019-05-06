@@ -132,6 +132,13 @@ saveCredentials(email, pass) async {
   await secureStore.write(key: 'loginPass', value: pass);
 }
 
+searchAndBuildRecipes() async {
+  print(currentFilters);
+
+  var recipeResults = await api.searchRecipes();
+  buildArray(recipeResults, 'recipes');
+}
+
 BoxDecoration boxDec(color1, color2, double border, double shadow) {
   return BoxDecoration(
     boxShadow: [
@@ -165,6 +172,14 @@ TextStyle subHeadStyle(int color) {
       fontWeight: FontWeight.bold,
       color: Color(color),
       fontSize: 23.0);
+}
+
+TextStyle bodyStyle(int color) {
+  return TextStyle(
+      fontFamily: 'Montserrat',
+      fontWeight: FontWeight.bold,
+      color: Color(color),
+      fontSize: 16.0);
 }
 
 TextStyle textStyle = TextStyle(

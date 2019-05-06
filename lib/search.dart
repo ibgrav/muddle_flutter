@@ -101,7 +101,7 @@ class ResultsState extends State<Results> {
     var gotRecipe;
 
     glob.recipes.forEach((oneRecipe) {
-      if(oneRecipe['name'] == item.name) gotRecipe = oneRecipe;
+      if (oneRecipe['name'] == item.name) gotRecipe = oneRecipe;
     });
 
     glob.pushMember(context, recipe.filterPage(gotRecipe));
@@ -168,10 +168,17 @@ Column buildIngredientsList(RecipeResult recipe, TextStyle font) {
   ];
 
   for (var ingredient in recipe.ingredients) {
+    var style;
+
+    if (!glob.currentFilters['ingredients'].contains(ingredient['name'])) {
+      style = glob.bodyStyle(0xffff3333);
+    } else
+      style = glob.bodyStyle(0xff333333);
+
     columnChildren.add(
       Padding(
           padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
-          child: Text(ingredient['name'], style: glob.textStyle)),
+          child: Text(ingredient['name'], style: style)),
     );
   }
 
@@ -298,8 +305,14 @@ class FilterItem extends StatelessWidget {
     font = glob.textStyle;
 
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         print(title);
+        glob.currentFilters['filters'].remove(title);
+        glob.currentFilters['ingredients'].remove(title);
+
+        await glob.searchAndBuildRecipes();
+
+        glob.pushMember(context, SearchResults());
       },
       child: AnimatedContainer(
         duration: Duration(milliseconds: 250),
