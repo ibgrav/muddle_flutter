@@ -69,6 +69,8 @@ class ResultsState extends State<Results> {
       ));
       counter++;
     }
+
+    recipes.sort((a, b) => a.matchStrength.compareTo(b.matchStrength));
   }
 
   @override
@@ -150,7 +152,7 @@ Column buildIngredientsList(RecipeResult recipe, TextStyle font) {
     Padding(
       padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
       child: Text(
-        'Match Strength: ' + recipe.matchStrength.toString(),
+        'Ingredients Missing: ' + recipe.matchStrength.toString(),
         textAlign: TextAlign.center,
         style: font,
       ),

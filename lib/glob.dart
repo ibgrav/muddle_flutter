@@ -91,7 +91,9 @@ recipeMatchStrength(ingredients){
     if(currentFilters['ingredients'].contains(ingredient['name'])) count++;
   }
 
-  return count;
+  int missing = ingredients.length - count;
+
+  return missing;
 }
 
 read(filename, old) async {
