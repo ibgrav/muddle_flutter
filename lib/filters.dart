@@ -8,10 +8,8 @@ Scaffold filterPage(bool search, String title, List list, String type, context, 
   if (search) {
     toWindow = FloatingActionButton.extended(
       onPressed: () async {
-        print(glob.currentFilters);
-
-        var recipeResults = await api.searchRecipes();
-        glob.buildArray(recipeResults, 'recipes');
+        
+        await glob.searchAndBuildRecipes();
 
         glob.pushMember(context, results.SearchResults());
       },

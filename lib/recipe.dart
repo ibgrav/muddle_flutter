@@ -27,6 +27,12 @@ Scaffold filterPage(var gotRecipe) {
   );
 
   for (var ing in gotRecipe['ingredients']) {
+    var style;
+
+    if(!glob.currentFilters['ingredients'].contains(ing['name'])){
+      style = glob.subHeadStyle(0xffff3333);
+    } else style = glob.subHeadStyle(0xff333333);
+
     ings.add(
       Padding(
         padding: EdgeInsets.all(20),
@@ -34,7 +40,7 @@ Scaffold filterPage(var gotRecipe) {
           child: Center(
             child: Text(
               ing['name'],
-              style: glob.subHeadStyle(0xff333333),
+              style: style,
             ),
           ),
         ),
