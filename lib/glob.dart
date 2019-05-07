@@ -10,6 +10,14 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import './api.dart' as api;
 
+// var ingArray = ["Vermouth"];
+
+// recipes.find((recipe) => {
+//   recipe.ingredients.find((ingredient) => {
+// 	if(ingArray.includes(ingredient.name)) console.log(recipe);
+//   });
+// });
+
 String loginEmail = '';
 String loginPass = '';
 
