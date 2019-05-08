@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 
 import './glob.dart' as glob;
 
-String url = 'https://muddle.dev/';
+String url = 'https://cms.muddle.dev/';
 
 filters() async {
   String data = await getHttp(url + 'filters');

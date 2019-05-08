@@ -60,7 +60,7 @@ initializeApp() async {
 }
 
 checkStorage(String title) async {
-  String checkForDoc = await read(title, -1);
+  String checkForDoc = await read(title, 5);
   String getData;
 
   if (checkForDoc == 'err' || checkForDoc == 'old') {
